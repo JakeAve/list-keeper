@@ -9,7 +9,7 @@ window.api.receive("send-all-notes", (data) => {
   for (const note of data.files) {
     const clone = template.content.cloneNode(true);
     const button = clone.querySelector("button");
-    button.innerHTML = note;
+    button.innerHTML = note.replace(/\-|\_/g, " ");
     button.addEventListener("click", () => {
       window.api.send("get-note", note);
       selectNote(note);
@@ -71,5 +71,8 @@ document.querySelector("#new-task-form").addEventListener("submit", (e) => {
 
 function selectNote(note) {
   selectedNote = note;
-  document.querySelector("#main-header").innerHTML = note;
+  document.querySelector("#main-header").innerHTML = note.replace(
+    /\-|\_/g,
+    " "
+  );
 }
