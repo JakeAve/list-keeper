@@ -27,7 +27,9 @@ app.whenReady().then(() => {
 
 ipcMain.on("read-all-notes", () => {
   const files = fs.readdirSync(path.join(__dirname, "content"));
-  const data = files.map((filename) => filename.replace(/.md$/, ""));
+  const data = files
+    .filter((name) => name.includes(".md"))
+    .map((filename) => filename.replace(/.md$/, ""));
   let selectedFile;
   try {
     selectedFile = fs.readFileSync(
@@ -75,6 +77,13 @@ ipcMain.on("update-list", (_events, data) => {
   const filename = data.filename;
 
   fs.writeFileSync(path.join(__dirname, "content", `${filename}.md`), string);
+});
+
+ipcMain.on("create-new-list", (_events, data) => {
+  console.log('created new list', data)
+  const { filename } = data;
+  fs.writeFileSync(path.join(__dirname, "content", `${filename}.md`), '');
+  win.webContents.send("new-list-created", { filename });
 });
 
 app.on("window-all-closed", () => {

@@ -19,6 +19,11 @@ window.api.receive("send-all-notes", (data) => {
   }
 });
 
+window.api.receive("new-list-created", (data) => {
+  selectNote(data.filename);
+  location.reload();
+});
+
 window.api.receive("send-note", (data) => {
   checklist = data;
   renderList();
@@ -66,6 +71,15 @@ document.querySelector("#new-task-form").addEventListener("submit", (e) => {
   checklist.push({ content: item, isChecked: false, idx: checklist.length });
   renderList();
   updateList();
+  form.reset();
+});
+
+document.querySelector("#new-list").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const form = e.target.closest("form");
+  const formData = new FormData(form);
+  const filename = formData.get("new-list-name");
+  window.api.send("create-new-list", { filename });
   form.reset();
 });
 
