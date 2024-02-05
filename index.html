@@ -6,7 +6,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Notes</title>
+    <title>Lists</title>
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./styles.css" />
     <script defer src="./renderer.js"></script>
@@ -25,13 +25,21 @@
     <div class="note-content">
       <template id="checkbox-template">
         <li>
-          <input type="checkbox" id="scales" name="scales"  />
+          <input type="checkbox" id="scales" name="scales" />
           <label for="scales">Scales</label>
         </li>
       </template>
-      <div><form id="new-task-form"><input type="text" id="new-item-input" name="new-item" /><button id="new-item-button" type="submit">+</button></form></div>
-      <ul id="note-content">
-      </ul>
+      <div>
+        <form id="new-task-form">
+          <input type="text" id="new-item-input" name="new-item" /><button
+            id="new-item-button"
+            type="submit"
+          >
+            +
+          </button>
+        </form>
+      </div>
+      <ul id="note-content"></ul>
     </div>
   </body>
 </html>

@@ -80,9 +80,9 @@ ipcMain.on("update-list", (_events, data) => {
 });
 
 ipcMain.on("create-new-list", (_events, data) => {
-  console.log('created new list', data)
+  console.log("created new list", data);
   const { filename } = data;
-  fs.writeFileSync(path.join(__dirname, "content", `${filename}.md`), '');
+  fs.writeFileSync(path.join(__dirname, "content", `${filename}.md`), "");
   win.webContents.send("new-list-created", { filename });
 });
 

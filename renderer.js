@@ -79,6 +79,9 @@ document.querySelector("#new-list").addEventListener("submit", (e) => {
   const form = e.target.closest("form");
   const formData = new FormData(form);
   const filename = formData.get("new-list-name");
+  if (filename.trim() === '') {
+    window.alert('Name cannot be blank')
+  }
   window.api.send("create-new-list", { filename });
   form.reset();
 });
